@@ -1,0 +1,36 @@
+This reference notes doesnt cover the installation part of PIG
+
+** PIG can be executed in two modes (execution modes)-  Local mode & MAp reduce mode.
+      IN local Mode - we can access the system local data and test the pig statements scripts before moving/testing into Production.
+              /* local mode */
+              $pig -x local 
+      IN Mapreduce mode - we can access only HDFS files and execute the Pig statemetns/scripts.
+              /* mapreduce mode */
+              $pig  (or) $ pig -x mapreduce 
+
+** PIG scripts can be executed in BATCH modes & Interactive modes in both execution modes.
+** we run PIG scripts in Grunt Shell.
+        grunt> A = LOAD 'file name with full path' using PigStorage();
+        grunt> DUMP A
+** pig scripts have the extension .pig
+
+** Pig Latin statements are generally organized as follows:
+
+      A LOAD statement to read data from the file system.
+      A series of "transformation" statements to process the data.
+      A DUMP statement to view results or a STORE statement to save the results.
+      
+** Results can be displayed on any of two ways:
+      DUMP keyword to display the results without storing on HDFS
+      
+      grunt>DUMP A
+      
+      (suresh,1,100)
+      (Gorakala,2,200)
+      (PIG,3,300)
+      
+      STORE keyword to store the results on to HDFS 
+      grunt> STORE 
+
+** case sensitive is not adhered for KEYWORDS but is applicable for the identifiers/variables we use
+** Function names PigStorage and COUNT are case sensitive.
