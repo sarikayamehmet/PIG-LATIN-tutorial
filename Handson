@@ -1,0 +1,65 @@
+$pig
+--load data into A
+grunt> A = LOAD 'pig_samp.csv' using PigStorage(',') as (p1:chararray,p2:chararray,p3:chararray,p4:float,p5:float,p6:float,p7:float,p8:int,p9:float)
+grunt> DUMP A
+          (NYSE,QXM,2007-05-11,10.89,11.03,10.55,10.7,264000,10.7)
+          (NYSE,QXM,2007-05-10,11.3,11.35,10.8,10.85,262900,10.85)
+          (NYSE,QXM,2007-05-09,10.41,11.24,10.41,11.23,375500,11.23)
+          (NYSE,QXM,2007-05-08,10.69,10.95,10.35,10.51,854400,10.51)
+          (NYSE,QXM,2007-05-07,10.5,11.0,10.3,10.89,593600,10.89)
+          (NYSE,QXM,2007-05-04,11.61,11.61,9.54,10.4,1054200,10.4)
+          (NYSE,QXM,2007-05-03,12.0,12.45,11.27,11.31,0,11.31)
+**Note: DUMP is used to write the output to the terminal.
+**Note: STORE is used to save the data to the HDFS.
+-- summing up all columns from p4 to p9 for every row (to work with columns use FOREACH/GENERATE)
+grunt>B = FOREACH A GENERATE p4+p5+p6+p7+p8+p9; 
+grunt> DUMP B          
+          
+          (380944.62)
+          (213545.81)
+          (97546.734)
+          (251447.0)
+          (147446.06)
+          (108147.59)
+          (121047.3)
+          (766047.56)
+          (347350.16)
+--where condtion on filtering rows (to work with rows use FILTER)
+grunt>C = FILTER B BY $0 > 1000000;
+grunt> DUMP C;
+          (1331238.0)
+          (1080039.5)
+          (1471846.8)
+          (1360258.8)
+          (1521368.6)
+          (4536770.5)
+          (2868965.2)
+          (1754356.9)
+          (1054253.5)
+--GROUP condition - is used as group by clause in SQL
+grunt> E = GROUP BY p4 
+
+      (20.62,{(NYSE,QTM,1999-08-13,20.62,21.44,20.56,21.31,652900,21.31)})
+      (20.69,{(NYSE,QTM,1999-08-19,20.69,20.81,19.94,20.12,493400,20.12)})
+      (21.19,{(NYSE,QTM,1999-08-18,21.19,21.56,20.44,20.69,591200,20.69)})
+      (21.44,{(NYSE,QTM,1999-08-17,21.44,21.5,21.13,21.44,430200,21.44)})
+      (21.5,{(NYSE,QTM,1999-08-16,21.5,21.75,21.06,21.19,524900,21.19)})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
