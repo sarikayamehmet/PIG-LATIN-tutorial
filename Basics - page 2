@@ -1,0 +1,68 @@
+Identifiers: The alias names(variable names) which we give. Identifiers start with a letter and can be followed by any number
+            of letters, digits, or underscores.
+            A
+            A123
+            abc_123_BeX_
+** Pig statements work with Relations
+  A relation can be defined as follows:
+    * A relation is a bag (more specifically, an outer bag).
+    * A bag is a collection of tuples.
+    * A tuple is an ordered set of fields.
+    * A field is a piece of data.
+  
+  "A Pig relation is a bag of tuples. A Pig relation is similar to a table in a relational database, where the
+  tuples in the bag correspond to the rows in a table. Unlike a relational table, however, Pig relations don't 
+  require that every tuple contain the same number of fields or that the fields in the same position 
+  (column) have the same type."
+  
+  Relations are referred to by name (or alias). Names are assigned by you as part of the Pig Latin statement. 
+  Example: A = LOAD 'student' USING PigStorage(',') AS (name:chararray, age:int, gpa:float);
+           DUMP A;
+           
+           (John,18,4.0F)
+           (Mary,19,3.8F)
+           (Bill,20,3.9F)
+           (Joe,18,3.8F)
+           
+  Fields are referred to by positional notation or by name (alias).
+  postions are refered by $0 (1st item),$1 (2nd Item),$2 (3rd item) etc.
+  Example:
+  A = LOAD 'student' USING PigStorage(',') AS (name:chararray, age:int, gpa:float);
+  X = FOREACH A GENERATE name,$2;
+  DUMP X;
+  (John,4.0F)
+  (Mary,3.8F)
+  (Bill,3.9F)
+  (Joe,3.8F)
+  
+** Its a good practice to mention the schema while loading the data:
+    ex: A = LOAD 'sales_data' using PigStorage(',') AS (item:charaaray,sale:float);
+  
+ 
+Data Types: 
+Different data types used: int,long,float,bytearray,double,chararray,boolean,tuple,bag,map(key,value pairs)
+  A tuple is an ordered set of fields.
+  (suresh,007,suresh@dp.com)  - here each value is called field (unit data) - collection of fields is called tuple
+  
+
+
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
