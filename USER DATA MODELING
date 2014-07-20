@@ -1,0 +1,4 @@
+-- loading event data
+EVTDT= LOAD 'eventdata.csv' USING PigStorage(',') AS (EVTID,LAT,LONG);
+EVTDT_GRP= GROUP EVTDT ALL;
+EVT_COUNT = FOREACH EVTDT_GRP GENERATE COUNT(EVTDT);
