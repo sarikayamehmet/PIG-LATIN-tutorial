@@ -19,3 +19,4 @@ ServerName:8888
   hdfs dfs -ls file:///home/poc_ops
   
   --http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
+--http://hortonworks.com/hadoop-tutorial/using-commandline-manage-files-hdfs/
