@@ -13,3 +13,9 @@ ServerName:8888
 
 -- remove dir hdfs
  hdfs dfs -rm -r dir_name
+ 
+ --To list the files in the root directory of the local filesystem, type:
+  hdfs dfs -ls file:///
+  hdfs dfs -ls file:///home/poc_ops
+  
+  --http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
