@@ -16,7 +16,14 @@ ServerName:8888
  
  --To list the files in the root directory of the local filesystem, type:
   hdfs dfs -ls file:///
-  hdfs dfs -ls file:///home/poc_ops
+  hdfs dfs -ls file:///home/poc_ops/CTR
+  hdfs dfs -ls hdfs://servername/user/poc_ops/CTR
+  
+  --find the size of each dir/file:
+  hdfs dfs -du  hdfs://XXXXXXXXX/user/poc_ops hdfs://XXXXXXXXX/user/poc_ops/CTR
+
+-copy data from local to Hdfs:
+hdfs dfs -copyFromLocal /home/poc_ops/train_CTR.csv hdfs://XXXXXXXXX/user/poc_ops/CTR
   
   --http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
 --http://hortonworks.com/hadoop-tutorial/using-commandline-manage-files-hdfs/
