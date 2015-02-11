@@ -1,5 +1,5 @@
 Import data to hadoop - command line:
-
+********head -n 10 /home/poc_ops/train_CTR.csv******* linux command to display top 10 rows of csv file**********
 --to list files/dir on hadoop:
 hdfs dfs -ls
 -- to get help
