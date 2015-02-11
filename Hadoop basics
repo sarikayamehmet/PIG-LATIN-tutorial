@@ -26,5 +26,8 @@ ServerName:8888
 hdfs dfs -copyFromLocal /home/poc_ops/train_CTR.csv hdfs://XXXXXXXXX/user/poc_ops/CTR
 hdfs dfs -copyFromLocal -f /home/poc_ops/train_CTR.csv hdfs://XXXXXXXXX/user/poc_ops/CTR
   
+  -- to get last kilobyte of data from the file
+ hdfs dfs -tail  hdfs://XXXXXXXXX/user/poc_ops/CTR/train_CTR.csv
+ 
   --http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
 --http://hortonworks.com/hadoop-tutorial/using-commandline-manage-files-hdfs/
