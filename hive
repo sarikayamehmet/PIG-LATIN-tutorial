@@ -43,5 +43,12 @@ STORED AS TEXTFILE;
 
 -- load data into CTR table
  LOAD DATA LOCAL INPATH '/home/poc_ops/train_CTR.csv' OVERWRITE INTO TABLE CTR;
+
+Basic analysis using HIVE:
 -- running select query:
-select count(*) from ctr where click = '0';
+select count(*) from ctr where click = '0';33563901
+select count(*) from ctr where click = '1'; 6865066
+select count(*) from ctr; 40428968
+
+%not clicked : 33563901/40428968 = 83%
+%clicked: 6865066/40428968 = 17%
