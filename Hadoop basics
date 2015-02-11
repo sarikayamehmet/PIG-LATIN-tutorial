@@ -20,10 +20,11 @@ ServerName:8888
   hdfs dfs -ls hdfs://servername/user/poc_ops/CTR
   
   --find the size of each dir/file:
-  hdfs dfs -du  hdfs://XXXXXXXXX/user/poc_ops hdfs://XXXXXXXXX/user/poc_ops/CTR
+  hdfs dfs -du -h hdfs://XXXXXXXXX/user/poc_ops hdfs://XXXXXXXXX/user/poc_ops/CTR
 
 -copy data from local to Hdfs:
 hdfs dfs -copyFromLocal /home/poc_ops/train_CTR.csv hdfs://XXXXXXXXX/user/poc_ops/CTR
+hdfs dfs -copyFromLocal -f /home/poc_ops/train_CTR.csv hdfs://XXXXXXXXX/user/poc_ops/CTR
   
   --http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
 --http://hortonworks.com/hadoop-tutorial/using-commandline-manage-files-hdfs/
