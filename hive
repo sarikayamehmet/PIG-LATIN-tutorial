@@ -1,1 +1,7 @@
+https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive
 hive commands:
+--launch hive using:
+hive;
+--exit hive using
+exit/quit;
+
