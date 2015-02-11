@@ -43,3 +43,5 @@ STORED AS TEXTFILE;
 
 -- load data into CTR table
  LOAD DATA LOCAL INPATH '/home/poc_ops/train_CTR.csv' OVERWRITE INTO TABLE CTR;
+-- running select query:
+select count(*) from ctr where click = '0';
