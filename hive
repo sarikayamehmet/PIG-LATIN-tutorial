@@ -52,3 +52,25 @@ select count(*) from ctr; 40428968
 
 %not clicked : 33563901/40428968 = 83%
 %clicked: 6865066/40428968 = 17%
+
+-- running hive scripts
+hive -f /path/to/script/hive1.q
+ hive -e 'select count(*) from ctr where click='1''; -- runnig queries directly.
+ 
+-- following command ensures buckets are populated according to the table definition
+ SET hive.enforce.bucketing=true;
+ 
+-- To see the current value of any property, use SET with just the property name:
+SET hive.enforce.bucketing;
+
+-- cast string to INT
+ select count(*) from ctr where cast(click as INT) = 1;
+
+INSERT OVERWRITE TABLE target
+SELECT col1, col2
+FROM source;
+
+INSERT OVERWRITE TABLE target
+PARTITION (dt='2010-01-01')
+SELECT col1, col2
+FROM source;
