@@ -1,2 +1,6 @@
 sqoop help -- to get the help 
 sqoop version  -- to get version
+
+fetch data from database:
+sqoop import \
+      -- 
