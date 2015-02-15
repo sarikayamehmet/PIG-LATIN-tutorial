@@ -3,4 +3,11 @@ sqoop version  -- to get version
 
 fetch data from database:
 sqoop import \
-      -- 
+	--connect 'jdbc:oracle:thin:@XXXXXXXXXX:6519:db_name' \
+	--username $USERNAME \
+	--password $PASSWORD \
+	--table  WKFL_OWNR.FOLLOWERS \
+	--m 1 \
+	--warehouse-dir /path/to/save_dir (or)
+	--target-dir /home/poc_ops/dbwkfl
+	--compress ---> to compress the table data loaded. GZip codec default.Gz extension
