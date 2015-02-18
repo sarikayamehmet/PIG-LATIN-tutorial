@@ -27,16 +27,40 @@ sqoop import \
 	--username $USERNAME \
 	--password $PASSWORD \
 	--table  WKFL_OWNR.FOLLOWERS \
-	--m 1 \
-	--warehouse-dir /path/to/save_dir (or) -- for common path for all activities we specify warehouse
-	--target-dir /home/poc_ops/dbwkfl
-	--as-sequentialfile 
-	--compress ---> to compress the table data loaded. GZip codec default.Gz extension
-	
+	--m 1 \ (or) --num-mappers 10 \
+	--warehouse-dir /path/to/save_dir  \(or) -- for common path for all activities we specify warehouse
+	--target-dir /home/poc_ops/dbwkfl \
+	--as-sequentialfile  \
+	--compress \ ---> to compress the table data loaded. GZip codec default.Gz extension
+
 -- By default, Sqoop will create a directory with the same name as the imported table inside
 your home directory on HDFS and import all data there.
 --The tab-separated CSV file that Sqoop uses by default
 -- Sqoop supports three different file formats; one of these is text, and the other two are
 binary. The binary formats are Avro and Hadoop’s SequenceFile.
 --enable import into SequenceFile using the --as-sequencefile parameter
+--Sqoop by default uses four concurrent map tasks to transfer data to Hadoop
+
+-- incremental append -- to fetch new data from existing table:
+--incremental append \
+--check-column id \
+--last-value 1
+
+
+You can take advantage of the built-in Sqoop metastore that allows you to save all parameters
+for later reuse. You can create a simple incremental import job with the following
+command:
+sqoop job \
+--create visits \
+-- \
+import \
+--connect jdbc:mysql://mysql.example.com/sqoop \
+--username sqoop \
+--password sqoop \
+--table visits \
+--incremental append \
+--check-column id \
+--last-value 0
+And start it with the --exec parameter:
+sqoop job --exec visits
 
