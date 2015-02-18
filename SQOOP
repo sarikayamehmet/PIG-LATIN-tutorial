@@ -1,6 +1,26 @@
 sqoop help -- to get the help 
 sqoop version  -- to get version
 -- to install the new jdbc for other db, first install the jdbc in $SQOOP_HOME/lib directory./usr/lib/sqoop/lib for example.
+-- The most important operations
+		import: for transferring data from a database to Hadoop 
+		export: for transferring data from Hadoop to a database
+--First, Sqoop will connect to the database
+to fetch table metadata: the number of table columns, their names, and the associated
+data types. For example, for table cities, Sqoop will retrieve information about the
+three columns: id, country, and city, with int, VARCHAR, and VARCHAR as their respective
+data types. Depending on the particular database system and the table itself, other
+useful metadata can be retrieved as well (for example, Sqoop can determine whether
+the table is partitioned or not). At this point, Sqoop is not transferring any data between
+the database and your machine; rather, it’s querying the catalog tables and views. Based
+on the retrieved metadata, Sqoop will generate a Java class and compile it using the JDK
+and Hadoop libraries available on your machine.
+Next, Sqoop will connect to your Hadoop cluster and submit a MapReduce job. Each
+mapper of the job will then transfer a slice of the table’s data. As MapReduce executes
+multiple mappers at the same time, Sqoop will be transferring data in parallel to achieve
+the best possible performance by utilizing the potential of your database server. Each
+mapper transfers the table’s data directly between the database and the Hadoop cluster.
+To avoid becoming a transfer bottleneck, the Sqoop client acts as the overseer rather
+than as an active participant in transferring the data. This is a key tenet of Sqoop’s design.
 fetch data from database:
 sqoop import \
 	--connect 'jdbc:oracle:thin:@XXXXXXXXXX:6519:db_name' \
@@ -8,6 +28,15 @@ sqoop import \
 	--password $PASSWORD \
 	--table  WKFL_OWNR.FOLLOWERS \
 	--m 1 \
-	--warehouse-dir /path/to/save_dir (or)
+	--warehouse-dir /path/to/save_dir (or) -- for common path for all activities we specify warehouse
 	--target-dir /home/poc_ops/dbwkfl
+	--as-sequentialfile 
 	--compress ---> to compress the table data loaded. GZip codec default.Gz extension
+	
+-- By default, Sqoop will create a directory with the same name as the imported table inside
+your home directory on HDFS and import all data there.
+--The tab-separated CSV file that Sqoop uses by default
+-- Sqoop supports three different file formats; one of these is text, and the other two are
+binary. The binary formats are Avro and Hadoop’s SequenceFile.
+--enable import into SequenceFile using the --as-sequencefile parameter
+
