@@ -1,6 +1,6 @@
 sqoop help -- to get the help 
 sqoop version  -- to get version
-
+-- to install the new jdbc for other db, first install the jdbc in $SQOOP_HOME/lib directory./usr/lib/sqoop/lib for example.
 fetch data from database:
 sqoop import \
 	--connect 'jdbc:oracle:thin:@XXXXXXXXXX:6519:db_name' \
