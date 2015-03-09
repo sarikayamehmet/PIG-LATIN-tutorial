@@ -3,10 +3,10 @@ Import data to hadoop - command line:
 --to list files/dir on hadoop:
 hdfs dfs -ls
 -- to get help
-hadoop fs -help
+hdfs dfs -help
 
 -- create  dir on hdfs
-hadoop fs -mkdir CTR
+hdfs dfs -mkdir CTR
 
 connecting to HUE:
 ServerName:8888
