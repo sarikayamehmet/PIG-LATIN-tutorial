@@ -31,3 +31,12 @@ hdfs dfs -copyFromLocal -f /home/poc_ops/train_CTR.csv hdfs://XXXXXXXXX/user/poc
  
   --http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
 --http://hortonworks.com/hadoop-tutorial/using-commandline-manage-files-hdfs/
+
+
+hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.6.0-mr1-cdh5.4.0.jar \
+-mapper /home/cloudera/RnD/mapper.py \
+-reducer /home/cloudera/RnD/Reducer.py \
+-input file:///home/cloudera/repos/doc1.txt \
+-output /home/cloudera/RnD/hwoutput \
+-file /home/cloudera/RnD/mapper.py \
+-file /home/cloudera/RnD/Reducer.py
